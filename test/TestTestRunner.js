@@ -2,6 +2,8 @@ var TestIt = require('test_it');
 
 var TestRunner = require('../lib/runner/TestRunner').TestRunner;
 
+var timeout = 1000;
+
 TestIt ('TestTestRunner', {
   
   'before each': function (test) {
@@ -21,18 +23,18 @@ TestIt ('TestTestRunner', {
       }
     };
     
-    var runner = new TestRunner('some name', object);
-    test.runner = runner;
+    var runner = new TestRunner('TestName', object);
+    test.instance = runner;
     test.output = output;
   },
   
   'test run': function (test) {
     var done = false;
-    var runner = test.runner;
+    var runner = test.instance;
     runner.run(function () {
       done = true;
     });
-    
+
     test.waitFor(
       function (time) {
         return done || time > timeout;
@@ -40,7 +42,6 @@ TestIt ('TestTestRunner', {
       function () {
         var output = test.output;
         test.assertEqual(6, output.length, 'Output should have 6 lines');
-        
         var expected = [ 'before each', 'test first',
                          'before each', 'test second',
                          'before each', 'test third'];
@@ -48,13 +49,13 @@ TestIt ('TestTestRunner', {
           test.assertEqual(expected[index], output[index],
             'Some output doesn\'t match expect output');
         }
-                         
       });
+
   },
-  
+
   'test run specific': function (test) {
     var done = false;
-    var runner = test.runner;
+    var runner = test.instance;
     runner.run('test first', function () {
       done = true;
     });

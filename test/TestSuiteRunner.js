@@ -5,6 +5,8 @@ var TestIt = require('test_it');
 var MockConsole = require('./MockConsole').MockConsole;
 var SuiteRunner = require('../lib/runner/SuiteRunner').SuiteRunner;
 
+var timeout = 1000;
+
 TestIt('TestSuiteRunner', {
   
   'test parse': function (test) {
