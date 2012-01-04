@@ -1,0 +1,57 @@
+#!/usr/bin/env node
+
+var exec = require('child_process').exec,
+    fs = require('fs'),
+    path = require('path')
+    spawn = require('child_process').spawn;
+
+var commands = {
+  generate: {
+    description: 'Generate test',
+    execute: function (argv) {
+
+    }
+  },
+  help: {
+    description: 'Show this help',
+    execute: function () {
+      var package = path.join(__dirname, '..', 'package.json');
+      var config = JSON.parse(fs.readFileSync(package, 'utf8'));
+      
+      console.log ('CrossTest version: ' + config.version);
+      console.error ('Usage: ct [command]');
+      
+      console.error ();
+      console.error ('Commands:');
+
+      for (var command in commands) {
+        console.error ('  ' + command + ': ' + commands[command].description);
+      }
+      
+      console.error ();
+    }
+  }
+  
+}
+
+var main = function (argv) {
+  
+  var target = null;
+  
+  // Parse
+  if (argv.length > 2) {
+    var parameters = argv.slice(3);
+    var argument = argv[2];
+    target = commands[argument];
+  } 
+  
+  if (target) {
+    target.execute(argv);
+  } else {
+    commands.help.execute();
+  }
+  
+  
+}
+
+main (process.argv);
