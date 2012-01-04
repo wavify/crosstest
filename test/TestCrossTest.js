@@ -10,10 +10,16 @@ var timeout = 1000;
 TestIt('TestCrossTest', {
   
   'before each': function (test) {
+    MockConsole.setup(console);
     var instance = new CrossTest();
     
     test.instance = instance;
   },
+  'after each': function (test) {
+    MockConsole.reset();
+  },
+  
+  
   'test run all unit': function (test) {
     var testPath = path.join(__dirname, 'MockTest.js');
     
@@ -21,7 +27,7 @@ TestIt('TestCrossTest', {
     
     var instance = test.instance;
     
-    instance.unit(testPath, function (output) {
+    instance.test(testPath, function () {
       done = true;
     });
     
@@ -30,7 +36,19 @@ TestIt('TestCrossTest', {
         return done || time > timeout;
       },
       function () {
-        
+        var expected = 'before all\n' +
+                       'before each\n' +
+                       'test first\n' +
+                       'after each\n' +
+                       'before each\n' +
+                       'test second\n' +
+                       'after each\n' +
+                       'before each\n' +
+                       'test third\n' +
+                       'after each\n' +
+                       'after all\n';
+        test.assertEqual(expected, MockConsole.output, 
+          'Output from test framework should run all tests');
       });
   },
   'test run specific unit': function (test) {
@@ -40,7 +58,7 @@ TestIt('TestCrossTest', {
     
     var instance = test.instance;
     
-    instance.unit(testPath, 'test third', function (output) {
+    instance.test(testPath, 'test third', function () {
       done = true;
     });
     
@@ -49,7 +67,13 @@ TestIt('TestCrossTest', {
         return done || time > timeout;
       },
       function () {
-        
+        var expected = 'before all\n' +
+                       'before each\n' +
+                       'test third\n' +
+                       'after each\n' +
+                       'after all\n';
+        test.assertEqual(expected, MockConsole.output,
+          'Output from test framework should have only test third');
       });
   },
   'test run unit suite': function (test) {
@@ -59,7 +83,7 @@ TestIt('TestCrossTest', {
     
     var instance = test.instance;
     
-    instance.unit(testPath, function (output) {
+    instance.test(testPath, function () {
       done = true;
     });
     
@@ -68,7 +92,16 @@ TestIt('TestCrossTest', {
         return done || time > timeout;
       },
       function () {
-        
+        var expected = 'before all\n' + 
+                       'before each\n' +
+                       'test first\n' +
+                       'after each\n' +
+                       'before each\n' +
+                       'test third\n' +
+                       'after each\n' +
+                       'after all\n';
+        test.assertEqual(expected, MockConsole.output,
+          'Output from test framework should have first and third case');
       });
     
   }

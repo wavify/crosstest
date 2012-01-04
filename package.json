@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "dependencies": {
     "log4js": "git://github.com/teerapap/log4js-node.git",
+    "mime": "latest",
     "test_it": "git://github.com/llun/test_it.git"
   },
   "engines": [

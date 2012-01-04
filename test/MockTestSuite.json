@@ -1,0 +1,19 @@
+{
+  "name": "Mock test suite",
+  "type": "unit",
+  "suite": [
+    {
+      "name": "MockTest.js",
+      "test": [
+        "test first",
+        "test third"
+      ]
+    },
+    {
+      "name": "MockTest2.js",
+      "test": [
+        "test first"
+      ]
+    }
+  ]
+}

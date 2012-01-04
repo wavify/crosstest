@@ -7,12 +7,12 @@ var MockConsole = {
     var error = stdio.error;
     
     stdio.log = function (message) {
-      MockConsole.output += message;
+      MockConsole.output += message.toString() + '\n';
       output.call(stdio, message);
     }
     
     stdio.error = function (message) {
-      MockConsole.error += message
+      MockConsole.error += message.toString() + '\n';
       error.call(stdio, message);
     }
     
