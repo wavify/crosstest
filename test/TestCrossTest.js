@@ -102,6 +102,36 @@ TestIt('TestCrossTest', {
   },
   
   'test run folder': function (test) {
+    var testPath = path.join(__dirname, 'integration2');
     
+    var done = false;
+    
+    var instance = test.instance;
+    instance.test(testPath, function () {
+      done = true;
+    });
+    
+    test.waitFor(
+      function (time) {
+        return done || time > timeout;
+      },
+      function () {
+        var mock1 = require('./integration/TestMock1').output;
+        var mock2 = require('./integration/TestMock2').output;
+        
+        var actual = mock1.concat(mock2);
+        var expect = [ 'before all',
+                       'before each', 'test first', 'after each',
+                       'before each', 'test second', 'after each',
+                       'before each', 'test third', 'after each',
+                       'after all',
+                       'before all',
+                       'test first', 'after each',
+                       'test second', 'after each'];
+                       
+        for (var index in expect) {
+          test.assertEqual(expect[index], actual[index]);
+        }
+      });
   }
 });
