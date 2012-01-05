@@ -116,8 +116,8 @@ TestIt('TestCrossTest', {
         return done || time > timeout;
       },
       function () {
-        var mock1 = require('./integration/TestMock1').output;
-        var mock2 = require('./integration/TestMock2').output;
+        var mock1 = require('./integration2/TestMock1').output;
+        var mock2 = require('./integration2/TestMock2').output;
         
         var actual = mock1.concat(mock2);
         var expect = [ 'before all',
