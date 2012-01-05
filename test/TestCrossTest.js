@@ -99,5 +99,9 @@ TestIt('TestCrossTest', {
         
       });
     
+  },
+  
+  'test run folder': function (test) {
+    
   }
 });
