@@ -18,7 +18,7 @@ TestIt('TestCrossTest', {
     
     var instance = test.instance;
     
-    instance.test(testPath, function () {
+    instance.run(testPath, function () {
       done = true;
     });
     
@@ -48,7 +48,7 @@ TestIt('TestCrossTest', {
     
     var instance = test.instance;
     
-    instance.test(testPath, 'test third', function () {
+    instance.run(testPath, 'test third', function () {
       done = true;
     });
     
@@ -76,7 +76,7 @@ TestIt('TestCrossTest', {
     
     var instance = test.instance;
     
-    instance.test(testPath, function () {
+    instance.run(testPath, function () {
       done = true;
     });
     
@@ -107,7 +107,7 @@ TestIt('TestCrossTest', {
     var done = false;
     
     var instance = test.instance;
-    instance.test(testPath, function () {
+    instance.run(testPath, function () {
       done = true;
     });
     
