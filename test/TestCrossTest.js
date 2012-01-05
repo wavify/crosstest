@@ -90,7 +90,7 @@ TestIt('TestCrossTest', {
         var actual = mock1.concat(mock2);
         var expect = [ 'before all',
                        'before each', 'test first', 'after each',
-                       'before each', 'test thid', 'after each',
+                       'before each', 'test third', 'after each',
                        'after all'];
         
         for (var index in expect) {
