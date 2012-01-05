@@ -1,8 +1,5 @@
 var path = require('path');
-
 var TestIt = require('test_it');
-
-var MockConsole = require('./MockConsole').MockConsole;
 var CrossTest = require('../lib/crosstest').CrossTest;
 
 var timeout = 1000;
@@ -15,7 +12,7 @@ TestIt('TestCrossTest', {
   },
   
   'test run all unit': function (test) {
-    var testPath = path.join(__dirname, 'MockTest.js');
+    var testPath = path.join(__dirname, 'MockTest3.js');
     
     var done = false;
     
@@ -30,24 +27,22 @@ TestIt('TestCrossTest', {
         return done || time > timeout;
       },
       function () {
-        var expected = 'before all\n' +
-                       'before each\n' +
-                       'test first\n' +
-                       'after each\n' +
-                       'before each\n' +
-                       'test second\n' +
-                       'after each\n' +
-                       'before each\n' +
-                       'test third\n' +
-                       'after each\n' +
-                       'after all\n';
-        test.assertEqual(expected, MockConsole.output, 
-          'Output from test framework should run all tests');
+        var actual = require('./MockTest3').output;
+        var expect = [ 'before all',
+                       'before each', 'test first', 'after each',
+                       'before each', 'test second', 'after each',
+                       'before each', 'test third', 'after each',
+                       'after all'];
+        
+        for (var index in expect) {
+          test.assertEqual(expect[index], actual[index]);
+        }
+        
       });
   },
   
   'test run specific unit': function (test) {
-    var testPath = path.join(__dirname, 'MockTest.js');
+    var testPath = path.join(__dirname, 'MockTest4.js');
     
     var done = false;
     
@@ -62,19 +57,20 @@ TestIt('TestCrossTest', {
         return done || time > timeout;
       },
       function () {
-        var expected = 'before all\n' +
-                       'before each\n' +
-                       'test third\n' +
-                       'after each\n' +
-                       'after all\n';
-        test.assertEqual(expected, MockConsole.output,
-          'Output from test framework should have only test third');
+        var actual = require('./MockTest4').output;
+        var expect = [ 'before all',
+                       'before each', 'test third', 'after each',
+                       'after all'];
+        
+        for (var index in expect) {
+          test.assertEqual(expect[index], actual[index]);
+        }
+        
       });
   },
   
-  /*
   'test run unit suite': function (test) {
-    var testPath = path.join(__dirname, 'MockTestSuite.json');
+    var testPath = path.join(__dirname, 'MockTestSuite2.json');
     
     var done = false;
     
@@ -89,18 +85,19 @@ TestIt('TestCrossTest', {
         return done || time > timeout;
       },
       function () {
-        var expected = 'before all\n' + 
-                       'before each\n' +
-                       'test first\n' +
-                       'after each\n' +
-                       'before each\n' +
-                       'test third\n' +
-                       'after each\n' +
-                       'after all\n';
-        test.assertEqual(expected, MockConsole.output,
-          'Output from test framework should have first and third case');
+        var mock1 = require('./MockTest5').output;
+        var mock2 = require('./MockTest6').output;
+        var actual = mock1.concat(mock2);
+        var expect = [ 'before all',
+                       'before each', 'test first', 'after each',
+                       'before each', 'test thid', 'after each',
+                       'after all'];
+        
+        for (var index in expect) {
+          test.assertEqual(expect[index], actual[index]);
+        }
+        
       });
     
   }
-  */
 });

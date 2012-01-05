@@ -1,0 +1,20 @@
+{
+  "name": "Mock test suite",
+  "suite": [
+    {
+      "file": "MockTest5.js",
+      "name": "MockTest5",
+      "test": [
+        "test first",
+        "test third"
+      ]
+    },
+    {
+      "file": "MockTest6.js",
+      "name": "MockTest6",
+      "test": [
+        "test first"
+      ]
+    }
+  ]
+}
