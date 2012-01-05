@@ -1,19 +1,22 @@
+var output = [];
+
 var test = {
   'before all': function (test) {
-    console.log ('before all');
+    output.push('before all');
   },
   
   'test first': function (test) {
-    console.log ('test first');
+    output.push('test first');
   },
   
   'test second': function (test) {
-    console.log ('test second');
+    output.push('test second');
   },
   
   'after each': function (test) {
-    console.log ('after each');
+    output.push('after each');
   }
 }
 
 exports.test = test;
+exports.output = output;

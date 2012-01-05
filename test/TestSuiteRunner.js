@@ -1,8 +1,6 @@
 var path = require('path');
-
 var TestIt = require('test_it');
 
-var MockConsole = require('./MockConsole').MockConsole;
 var SuiteRunner = require('../lib/runner/SuiteRunner').SuiteRunner;
 
 var timeout = 1000;
@@ -39,7 +37,6 @@ TestIt('TestSuiteRunner', {
   },
   
   'test run': function (test) {
-    MockConsole.setup(console);
     
     var done = false;
     
@@ -53,22 +50,21 @@ TestIt('TestSuiteRunner', {
         return done || time > timeout;
       },
       function () {
-        var actualOutput = MockConsole.output;
-        var expectOutput = 'before all\n' +
-                           'before each\n' +
-                           'test first\n' +
-                           'after each\n' +
-                           'before each\n' +
-                           'test third\n' +
-                           'after each\n' +
-                           'after all\n' +
-                           'before all\n' +
-                           'test first\n' +
-                           'after each\n';
-        test.assertEqual(expectOutput, actualOutput,
-          'Actual output should be the same as Expect output');
-
-        MockConsole.reset();
+        var expectOutput = ['before all', 
+                            'before each', 'test first', 'after each',
+                            'before each', 'test third', 'after each',
+                            'after all',
+                            'before all',
+                            'test first', 'after each'];
+                            
+        var mock1 = require('./MockTest').output;
+        var mock2 = require('./MockTest2').output;
+        var actualOutput = mock1.concat(mock2);
+        
+        for (var index in expectOutput) {
+          test.assertEqual(expectOutput[index], actualOutput[index]);
+        }
+        
       });
     
   }

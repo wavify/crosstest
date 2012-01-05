@@ -1,25 +1,28 @@
+var output = [];
+
 var test = {
   'before all': function (test) {
-    console.log ('before all');
+    output.push('before all');
   },
   'after all': function (test) {
-    console.log ('after all');
+    output.push('after all');
   },
   'before each': function (test) {
-    console.log ('before each');
+    output.push('before each');
   },
   'after each': function (test) {
-    console.log ('after each');
+    output.push('after each');
   },
   'test first': function (test) {
-    console.log ('test first');
+    output.push('test first');
   },
   'test second': function (test) {
-    console.log ('test second');
+    output.push('test second');
   },
   'test third': function (test) {
-    console.log ('test third');
+    output.push('test third');
   }
 }
 
 exports.test = test;
+exports.output = output;
