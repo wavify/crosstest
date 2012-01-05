@@ -1,15 +1,15 @@
 var test = {
   'before all': function (test) {
-    console.log ('Run before all');
+    console.log ('before all');
   },
   'after all': function (test) {
-    console.log ('Run after all');
+    console.log ('after all');
   },
   'before each': function (test) {
-    console.log ('Run before each');
+    console.log ('before each');
   },
   'after each': function (test) {
-    console.log ('Run after each');
+    console.log ('after each');
   },
   'test first': function (test) {
     console.log ('test first');

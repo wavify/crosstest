@@ -1,16 +1,17 @@
 {
   "name": "Mock test suite",
-  "type": "unit",
   "suite": [
     {
-      "name": "MockTest.js",
+      "file": "MockTest.js",
+      "name": "MockTest",
       "test": [
         "test first",
         "test third"
       ]
     },
     {
-      "name": "MockTest2.js",
+      "file": "MockTest2.js",
+      "name": "MockTest2",
       "test": [
         "test first"
       ]

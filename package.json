@@ -3,6 +3,7 @@
   "description": "Test framework for Crossweb and Internal Wavify projects",
   "version": "0.0.1",
   "dependencies": {
+    "async": "latest",
     "log4js": "git://github.com/teerapap/log4js-node.git",
     "mime": "latest",
     "test_it": "git://github.com/llun/test_it.git"
