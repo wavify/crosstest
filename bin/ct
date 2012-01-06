@@ -21,7 +21,9 @@ var main = function (argv) {
     }
     
     // Trim target before send to runner
-    target = target.replace(/^\s+|\s+$/g, '');
+    if (target) {
+      target = target.replace(/^\s+|\s+$/g, '');
+    }
     
     instance.run(path.join(process.cwd(), file), target);
   } else {
