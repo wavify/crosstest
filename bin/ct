@@ -1,56 +1,41 @@
 #!/usr/bin/env node
 
-var exec = require('child_process').exec,
-    fs = require('fs'),
-    path = require('path')
-    spawn = require('child_process').spawn;
+var fs = require('fs'),
+    path = require('path');
 
-var commands = {
-  generate: {
-    description: 'Generate test',
-    execute: function (argv) {
-
-    }
-  },
-  help: {
-    description: 'Show this help',
-    execute: function () {
-      var package = path.join(__dirname, '..', 'package.json');
-      var config = JSON.parse(fs.readFileSync(package, 'utf8'));
-      
-      console.log ('CrossTest version: ' + config.version);
-      console.error ('Usage: ct [command]');
-      
-      console.error ();
-      console.error ('Commands:');
-
-      for (var command in commands) {
-        console.error ('  ' + command + ': ' + commands[command].description);
-      }
-      
-      console.error ();
-    }
-  }
-  
-}
+var CrossTest = require('../').CrossTest;
 
 var main = function (argv) {
-  
-  var target = null;
-  
-  // Parse
   if (argv.length > 2) {
-    var parameters = argv.slice(3);
-    var argument = argv[2];
-    target = commands[argument];
-  } 
-  
-  if (target) {
-    target.execute(argv);
+    var instance = new CrossTest();
+    
+    var file = argv[2];
+    var target = null;
+    
+    if (argv.length > 3) {
+      // Build target
+      target = '';
+      for (var index = 3; index < argv.length; index++) {
+        target += argv[index] + ' ';
+      }
+    }
+    
+    instance.run(path.join(process.cwd(), file), target);
   } else {
-    commands.help.execute();
+    // Show help
+    var package = path.join(__dirname, '..', 'package.json');
+    var config = JSON.parse(fs.readFileSync(package, 'utf8'));
+    
+    console.log ('Crosstest version: ' + config.version);
+    console.log ('Usage: ct [test target]');
+    console.log ('Example');
+    console.log ('Run test: ct test.js');
+    console.log ('Run test with specific target: ct test.js test something');
+    console.log ('Run integration test: ct directory');
+    console.log ('Run suite: ct suite.json');
+    
+    console.log ()
   }
-  
   
 }
 

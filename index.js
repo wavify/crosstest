@@ -1,0 +1,1 @@
+exports.CrossTest = require('./lib/CrossTest').CrossTest;

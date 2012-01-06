@@ -1,6 +1,6 @@
 var path = require('path');
 var TestIt = require('test_it');
-var CrossTest = require('../lib/crosstest').CrossTest;
+var CrossTest = require('../lib/CrossTest').CrossTest;
 
 var timeout = 1000;
 
