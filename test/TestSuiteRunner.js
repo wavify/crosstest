@@ -100,6 +100,29 @@ TestIt('TestSuiteRunner', {
           test.assertEqual(expectOutput[index], actualOutput[index]);
         }
       });
+  },
+  
+  'test run suite without specify test': function (test) {
+    var done = false;
+    
+    var runner = new SuiteRunner(path.join(__dirname, 'MockTestSuite4.json'));
+    runner.run(function () {
+      done = true;
+    });
+    
+    test.waitFor(
+      function (time) {
+        return done || time > timeout;
+      },
+      function () {
+        var collector = Collector.getInstance('suite4');
+        var actualOutput = collector.data;
+        
+        var expectOutput = [ 'test first', 'test second' ];
+        for (var index in expectOutput) {
+          test.assertEqual(expectOutput[index], actualOutput[index]);
+        }
+      });
   }
   
 });
