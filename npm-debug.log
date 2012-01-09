@@ -1,0 +1,71 @@
+info it worked if it ends with ok
+verbose cli [ 'node',
+verbose cli   '/usr/local/bin/npm',
+verbose cli   'install',
+verbose cli   '-g',
+verbose cli   'git+http://192.168.178.10/git/crosstest.git' ]
+info using npm@1.0.104
+info using node@v0.4.12
+verbose config file /Users/llun/.npmrc
+verbose config file /usr/local/etc/npmrc
+verbose config file /usr/local/lib/node_modules/npm/npmrc
+silly exec /usr/local/bin/node "/usr/local/lib/node_modules/npm/bin/npm-get-uid-gid.js" "nobody" 20
+silly spawning [ '/usr/local/bin/node',
+silly spawning   [ '/usr/local/lib/node_modules/npm/bin/npm-get-uid-gid.js',
+silly spawning     'nobody',
+silly spawning     20 ],
+silly spawning   null ]
+silly output from getuid/gid {"uid":-2,"gid":20}
+silly output from getuid/gid 
+verbose into /usr/local/lib [ 'git+http://192.168.178.10/git/crosstest.git' ]
+verbose cache add git+http://192.168.178.10/git/crosstest.git
+verbose cache add [ 'git+http://192.168.178.10/git/crosstest.git',
+verbose cache add   null ]
+silly cache add: name, spec, args [ undefined,
+silly cache add: name, spec, args   'git+http://192.168.178.10/git/crosstest.git',
+silly cache add: name, spec, args   [ 'git+http://192.168.178.10/git/crosstest.git',
+silly cache add: name, spec, args     null ] ]
+verbose parsed url { protocol: 'githttp:',
+verbose parsed url   slashes: true,
+verbose parsed url   host: '192.168.178.10',
+verbose parsed url   hostname: '192.168.178.10',
+verbose parsed url   href: 'githttp://192.168.178.10/git/crosstest.git',
+verbose parsed url   pathname: '/git/crosstest.git' }
+verbose addRemoteGit [ 'http://192.168.178.10/git/crosstest.git',
+verbose addRemoteGit   'master' ]
+verbose mkdir (expected) error ENOENT, No such file or directory '/tmp/npm-1326098737416'
+verbose mkdir done: /tmp/npm-1326098737416 755
+silly exec git "clone" "http://192.168.178.10/git/crosstest.git" "/tmp/npm-1326098737416/1326098737416-0.9868800872936845"
+silly spawning [ 'git',
+silly spawning   [ 'clone',
+silly spawning     'http://192.168.178.10/git/crosstest.git',
+silly spawning     '/tmp/npm-1326098737416/1326098737416-0.9868800872936845' ],
+silly spawning   null ]
+verbose git clone http://192.168.178.10/git/crosstest.git Cloning into /tmp/npm-1326098737416/1326098737416-0.9868800872936845...
+silly exec git "checkout" "master"
+silly spawning [ 'git',
+silly spawning   [ 'checkout', 'master' ],
+silly spawning   '/tmp/npm-1326098737416/1326098737416-0.9868800872936845' ]
+verbose git checkout master Already on 'master'
+ERR! Error: Invalid 'version' field: 1.1
+ERR! 'version' Must be X.Y.Z, with an optional trailing tag.
+ERR! See the section on 'version' in `npm help json`
+ERR!     at /usr/local/lib/node_modules/npm/lib/utils/read-json.js:335:13
+ERR!     at /usr/local/lib/node_modules/npm/lib/utils/read-json.js:134:32
+ERR!     at P (/usr/local/lib/node_modules/npm/lib/utils/read-json.js:110:40)
+ERR!     at cb (/usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:36:9)
+ERR!     at [object Object].<anonymous> (fs.js:107:5)
+ERR!     at [object Object].emit (events.js:61:17)
+ERR!     at afterRead (fs.js:878:12)
+ERR!     at wrapper (fs.js:245:17)
+ERR! Report this *entire* log at:
+ERR!     <http://github.com/isaacs/npm/issues>
+ERR! or email it to:
+ERR!     <npm-@googlegroups.com>
+ERR! 
+ERR! System Darwin 11.2.0
+ERR! command "node" "/usr/local/bin/npm" "install" "-g" "git+http://192.168.178.10/git/crosstest.git"
+ERR! cwd /Users/llun/Documents/workspace/crosstest
+ERR! node -v v0.4.12
+ERR! npm -v 1.0.104
+verbose exit [ 1, true ]
