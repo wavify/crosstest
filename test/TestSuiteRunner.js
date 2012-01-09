@@ -1,6 +1,7 @@
 var path = require('path');
 var TestIt = require('test_it');
 
+var Collector = require('./OutputCollector');
 var SuiteRunner = require('../lib/runner/SuiteRunner').SuiteRunner;
 
 var timeout = 1000;
@@ -67,6 +68,38 @@ TestIt('TestSuiteRunner', {
         
       });
     
+  },
+  
+  'test run suite with scripts': function (test) {
+    var done = false;
+    
+    var runner = new SuiteRunner(path.join(__dirname, 'MockTestSuite3.json'));
+    runner.run(function () {
+      done = true;
+    });
+    
+    test.waitFor(
+      function (time) {
+        return done || time > timeout;
+      },
+      function () {
+        var collector = Collector.getInstance('suite3');
+        var actualOutput = collector.data;
+        
+        var expectOutput = [ 'scripts before all',
+                             'scripts before each',
+                             'before each', 'test first',
+                             'before each', 'test second',
+                             'scripts after each',
+                             'scripts before each',
+                             'test forth',
+                             'scripts after each',
+                             'scripts after all'];
+        
+        for (var index in expectOutput) {
+          test.assertEqual(expectOutput[index], actualOutput[index]);
+        }
+      });
   }
   
 });
