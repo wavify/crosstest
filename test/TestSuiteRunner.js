@@ -118,7 +118,8 @@ TestIt('TestSuiteRunner', {
         var collector = Collector.getInstance('suite4');
         var actualOutput = collector.data;
         
-        var expectOutput = [ 'test first', 'test second' ];
+        var expectOutput = [ 'scripts before each', 'test first', 'test second', 'scripts after each', 
+                             'scripts before each', 'test third', 'test forth', 'test fifth', 'scripts after each' ];
         for (var index in expectOutput) {
           test.assertEqual(expectOutput[index], actualOutput[index]);
         }

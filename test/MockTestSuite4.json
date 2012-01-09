@@ -1,10 +1,14 @@
 {
   "name": "Mock test suite",
-  "scripts": "MockScript.js",
+  "scripts": "MockScript2.js",
   "suite": [
     {
       "file": "MockTest9.js",
       "name": "MockTest9"
+    },
+    {
+      "file": "MockTest10.js",
+      "name": "MockTest10"
     }
   ]
 }

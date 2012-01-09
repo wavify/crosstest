@@ -5,6 +5,7 @@ var Collector = function () {
   
   self.data = [];
   self.append = function (input) {
+    console.log (input);
     self.data.push(input);
   }
 }
