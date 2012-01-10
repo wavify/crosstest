@@ -1,13 +1,14 @@
-var collector = require('./OutputCollector').getInstance('suite3');
+var fs = require('./OutputWriter');
+var file = require('path').join(__dirname, 'Suite3.out');
 
 var test = {
   
   'test third': function (test) {
-    collector.append('test third');
+    fs.appendFileSync(file, 'test third\n');
   },
   
   'test forth': function (test) {
-    collector.append('test forth');
+    fs.appendFileSync(file, 'test forth\n');
   }
   
 }

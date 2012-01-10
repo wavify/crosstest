@@ -3,18 +3,11 @@
   "suite": [
     {
       "file": "MockTest5.js",
-      "name": "MockTest5",
-      "test": [
-        "test first",
-        "test third"
-      ]
+      "name": "MockTest5"
     },
     {
       "file": "MockTest6.js",
-      "name": "MockTest6",
-      "test": [
-        "test first"
-      ]
+      "name": "MockTest6"
     }
   ]
 }

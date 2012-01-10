@@ -1,4 +1,6 @@
-var path = require('path');
+var fs = require('fs'),
+    path = require('path');
+    
 var TestIt = require('test_it');
 var CrossTest = require('../lib/CrossTest').CrossTest;
 
@@ -85,13 +87,21 @@ TestIt('TestCrossTest', {
         return done || time > timeout;
       },
       function () {
-        var mock1 = require('./MockTest5').output;
-        var mock2 = require('./MockTest6').output;
-        var actual = mock1.concat(mock2);
+        var suiteOutputPath = path.join(__dirname, 'Suite2.out');
+        test.assert(path.existsSync(suiteOutputPath), 
+          'Output file should be exists');
+        var output = fs.readFileSync(suiteOutputPath, 'utf8');
+        fs.unlinkSync(suiteOutputPath);
+        
+        var actual = output.split('\n');
         var expect = [ 'before all',
                        'before each', 'test first', 'after each',
+                       'before each', 'test second', 'after each',
                        'before each', 'test third', 'after each',
-                       'after all'];
+                       'after all',
+                       'before all',
+                       'test first', 'after each',
+                       'test second', 'after each'];
         
         for (var index in expect) {
           test.assertEqual(expect[index], actual[index]);
@@ -116,10 +126,15 @@ TestIt('TestCrossTest', {
         return done || time > timeout;
       },
       function () {
-        var mock1 = require('./integration2/TestMock1').output;
-        var mock2 = require('./integration2/TestMock2').output;
+        var integrationOutputPath = path.join(__dirname, 'Integration2.out');
         
-        var actual = mock1.concat(mock2);
+        test.assert(path.existsSync(integrationOutputPath), 
+          'Output file should be exists');
+        var output = fs.readFileSync(integrationOutputPath, 'utf8');
+        fs.unlinkSync(integrationOutputPath);
+        
+        var actual = output.split('\n');
+        
         var expect = [ 'before all',
                        'before each', 'test first', 'after each',
                        'before each', 'test second', 'after each',

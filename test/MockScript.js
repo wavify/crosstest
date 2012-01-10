@@ -1,17 +1,18 @@
-var collector = require('./OutputCollector').getInstance('suite3');
+var fs = require('./OutputWriter');
+var file = require('path').join(__dirname, 'Suite3.out');
 
 var scripts = {
   before: {
     all: function (callback) {
       callback = callback || function () {};
       
-      collector.append('scripts before all');
+      fs.appendFileSync(file, 'scripts before all\n');
       callback();
     },
     each: function (callback) {
       callback = callback || function () {};
       
-      collector.append('scripts before each');
+      fs.appendFileSync(file, 'scripts before each\n');
       callback();
     }
   },
@@ -19,13 +20,13 @@ var scripts = {
     all: function (callback) {
       callback = callback || function () {};
       
-      collector.append('scripts after all');
+      fs.appendFileSync(file, 'scripts after all\n');
       callback();
     },
     each: function (callback) {
       callback = callback || function () {};
       
-      collector.append('scripts after each');
+      fs.appendFileSync(file, 'scripts after each\n');
       callback();
     }
   }

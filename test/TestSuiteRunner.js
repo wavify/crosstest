@@ -1,7 +1,7 @@
-var path = require('path');
+var fs = require('fs'),
+    path = require('path');
 var TestIt = require('test_it');
 
-var Collector = require('./OutputCollector');
 var SuiteRunner = require('../lib/runner/SuiteRunner').SuiteRunner;
 
 var timeout = 1000;
@@ -17,24 +17,9 @@ TestIt('TestSuiteRunner', {
     
     var test1 = output.tests[0];
     test.assert(test1.name, 'First test should have name');
-    test.assert(test1.test, 'First test should have test');
-    test.assert(test1.test['before all'], 'First test should have before all');
-    test.assert(test1.test['before each'], 'First test should have before each');
-    test.assert(test1.test['after each'], 'First test should have after each');
-    test.assert(test1.test['after all'], 'First test should have after all');
-    test.assert(test1.test['test first'], 'First test should have "test first"');
-    test.assert(!test1.test['test second'], 'First test should not have "test first"');
-    test.assert(test1.test['test third'], 'First test should have "test third"');
     
     var test2 = output.tests[1];
     test.assert(test2.name, 'Second test should have name');
-    test.assert(test2.test, 'Second test should have test');
-    test.assert(test2.test['before all'], 'Second test should have before all');
-    test.assert(!test2.test['before each'], 'Second test should not have before each');
-    test.assert(test2.test['after each'], 'Second test should have after each');
-    test.assert(!test2.test['after all'], 'Second test should not have after all');
-    test.assert(test2.test['test first'], 'Second test should have "test first"');
-    test.assert(!test2.test['test second'], 'Second test should not have "test first"');
   },
   
   'test run': function (test) {
@@ -53,15 +38,21 @@ TestIt('TestSuiteRunner', {
       function () {
         var expectOutput = ['before all', 
                             'before each', 'test first', 'after each',
+                            'before each', 'test second', 'after each',
                             'before each', 'test third', 'after each',
                             'after all',
                             'before all',
-                            'test first', 'after each'];
-                            
-        var mock1 = require('./MockTest').output;
-        var mock2 = require('./MockTest2').output;
-        var actualOutput = mock1.concat(mock2);
+                            'test first', 'after each',
+                            'test second', 'after each'];
         
+        var suiteOutputPath = path.join(__dirname, 'Suite1.out');
+        test.assert(path.existsSync(suiteOutputPath), 
+          'Output file should be exists');
+        var output = fs.readFileSync(suiteOutputPath, 'utf8');
+        fs.unlinkSync(suiteOutputPath);
+
+        var actualOutput = output.split('\n');
+                        
         for (var index in expectOutput) {
           test.assertEqual(expectOutput[index], actualOutput[index]);
         }
@@ -83,8 +74,13 @@ TestIt('TestSuiteRunner', {
         return done || time > timeout;
       },
       function () {
-        var collector = Collector.getInstance('suite3');
-        var actualOutput = collector.data;
+        var suiteOutputPath = path.join(__dirname, 'Suite3.out');
+        test.assert(path.existsSync(suiteOutputPath), 
+          'Output file should be exists');
+        var output = fs.readFileSync(suiteOutputPath, 'utf8');
+        fs.unlinkSync(suiteOutputPath);
+
+        var actualOutput = output.split('\n');
         
         var expectOutput = [ 'scripts before all',
                              'scripts before each',
@@ -92,34 +88,11 @@ TestIt('TestSuiteRunner', {
                              'before each', 'test second',
                              'scripts after each',
                              'scripts before each',
+                             'test third',
                              'test forth',
                              'scripts after each',
                              'scripts after all'];
         
-        for (var index in expectOutput) {
-          test.assertEqual(expectOutput[index], actualOutput[index]);
-        }
-      });
-  },
-  
-  'test run suite without specify test': function (test) {
-    var done = false;
-    
-    var runner = new SuiteRunner(path.join(__dirname, 'MockTestSuite4.json'));
-    runner.run(function () {
-      done = true;
-    });
-    
-    test.waitFor(
-      function (time) {
-        return done || time > timeout;
-      },
-      function () {
-        var collector = Collector.getInstance('suite4');
-        var actualOutput = collector.data;
-        
-        var expectOutput = [ 'scripts before each', 'test first', 'test second', 'scripts after each', 
-                             'scripts before each', 'test third', 'test forth', 'test fifth', 'scripts after each' ];
         for (var index in expectOutput) {
           test.assertEqual(expectOutput[index], actualOutput[index]);
         }
