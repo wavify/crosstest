@@ -97,6 +97,35 @@ TestIt('TestSuiteRunner', {
           test.assertEqual(expectOutput[index], actualOutput[index]);
         }
       });
+  },
+  
+  'test run suite of suite': function (test) {
+    var done = false;
+    
+    var runner = new SuiteRunner(path.join(__dirname, 'MockTestSuite4.json'));
+    runner.run(function () {
+      done = true;
+    });
+    
+    test.waitFor(
+      function (time) {
+        return done || time > timeout;
+      },
+      function () {
+        var suiteOutputPath = path.join(__dirname, 'Suite4.out');
+        test.assert(path.existsSync(suiteOutputPath), 
+          'Output file should be exists');
+        var output = fs.readFileSync(suiteOutputPath, 'utf8');
+        fs.unlinkSync(suiteOutputPath);
+
+        var actualOutput = output.split('\n');
+        var expectOutput = [ 'test first',
+                             'test second' ];
+        
+        for (var index in expectOutput) {
+          test.assertEqual(expectOutput[index], actualOutput[index]);
+        }
+      });
   }
   
 });

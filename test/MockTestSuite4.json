@@ -1,0 +1,13 @@
+{
+  "name": "Mock test suite",
+  "suite": [
+    {
+      "file": "MockTestSuite5.json",
+      "name": "Suite1"
+    },
+    {
+      "file": "MockTestSuite6.json",
+      "name": "Suite2"
+    }
+  ]
+}

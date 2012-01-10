@@ -1,0 +1,9 @@
+{
+  "name": "Mock test suite5",
+  "suite": [
+    {
+      "file": "MockTest9.js",
+      "name": "MockTest9"
+    }
+  ]
+}
