@@ -1,22 +1,22 @@
-var output = [];
+var fs = require('../OutputWriter');
+var file = require('path').join(__dirname, '..', 'Integration.out');
 
 var test = {
   'before all': function (test) {
-    output.push('before all');
+    fs.appendFileSync(file, 'before all\n');
   },
   
   'test first': function (test) {
-    output.push('test first');
+    fs.appendFileSync(file, 'test first\n');
   },
   
   'test second': function (test) {
-    output.push('test second');
+    fs.appendFileSync(file, 'test second\n');
   },
   
   'after each': function (test) {
-    output.push('after each');
+    fs.appendFileSync(file, 'after each\n');
   }
 }
 
 exports.test = test;
-exports.output = output;

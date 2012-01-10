@@ -1,4 +1,5 @@
-var path = require('path');
+var fs = require('fs'),
+    path = require('path');
 
 var TestIt = require('test_it');
 var IntegrationRunner = require('../lib/runner/IntegrationRunner').IntegrationRunner;
@@ -20,10 +21,14 @@ TestIt('TestIntegrationRunner', {
         return done || time > timeout;
       },
       function () {
-        var mock1 = require('./integration/MockTest1').output;
-        var mock2 = require('./integration/MockTest2').output;
+        var integrationOutputPath = path.join(__dirname, 'Integration.out');
         
-        var actual = mock1.concat(mock2);
+        test.assert(path.existsSync(integrationOutputPath), 
+          'Output file should be exists');
+        var output = fs.readFileSync(integrationOutputPath, 'utf8');
+        fs.unlinkSync(integrationOutputPath);
+        
+        var actual = output.split('\n');
         var expect = [ 'before all',
                        'before each', 'test first', 'after each',
                        'before each', 'test second', 'after each',
