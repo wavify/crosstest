@@ -1,7 +1,7 @@
 {
   "name": "crosstest",
   "description": "Test framework for Crossweb and Internal Wavify projects",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "dependencies": {
     "async": "latest",
     "log4js": "git://github.com/teerapap/log4js-node.git",
