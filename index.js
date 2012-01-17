@@ -1,1 +1,1 @@
-exports.CrossTest = require('./lib/CrossTest').CrossTest;
+exports.CrossTest = require('./lib/crosstest').CrossTest;
