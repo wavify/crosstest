@@ -2,7 +2,7 @@
   "name": "crosstest",
   "preferGlobal": "true",
   "description": "Test framework for Crossweb and Internal Wavify projects",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "dependencies": {
     "async": "0.1.x",
     "log4js": "0.4.x",
