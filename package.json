@@ -5,8 +5,7 @@
   ],
   "keywords": "test command line framework",
   "bugs": {
-    "url": "http://github.com/wavify/crosstest/issues",
-    "email": "null@llun.in.th"
+    "url": "http://github.com/wavify/crosstest/issues"
   },
   "preferGlobal": "true",
   "description": "Test command line",
@@ -17,6 +16,10 @@
     "mime": "1.2.x",
     
     "test_it": "https://github.com/llun/test_it/tarball/master"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/wavify/crosstest"
   },
   "engines": [
     "node >=0.4"
