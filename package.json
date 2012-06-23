@@ -1,5 +1,13 @@
 {
   "name": "crosstest",
+  "contributors": [
+    "Maythee Anegboonlap <null@llun.in.th> (http://llun.in.th)"
+  ],
+  "keywords": "test command line framework",
+  "bugs": {
+    "url": "http://github.com/wavify/crosstest/issues",
+    "email": "null@llun.in.th"
+  },
   "preferGlobal": "true",
   "description": "Test command line",
   "version": "2.1.1",
