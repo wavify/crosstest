@@ -6,8 +6,8 @@ Crosstest is test command line uses to link and run test in each project with sa
 Requirement
 ===========
 
-- To use with node.js and javascript in browser. You have to use it with [customize test_it](https://github.com/llun/test_it) version.
-- To use with iOS/Mac OS project. You have to use it with GHUnit.
+- To use with node.js and javascript in browser. It requires [customize test_it](https://github.com/llun/test_it) version.
+- To use with iOS/Mac OS project. It requires [GHUnit](http://gabriel.github.com/gh-unit).
 
 Other framework will add in future.
 
