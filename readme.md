@@ -14,7 +14,7 @@ Other framework will add in future.
 Installation
 ============
 
-    npm install crosstest
+    sudo npm install -g crosstest
     
 How to run test
 ===============
