@@ -3,7 +3,9 @@
   "contributors": [
     "Maythee Anegboonlap <null@llun.in.th> (http://llun.in.th)"
   ],
-  "keywords": "test command line framework",
+  "keywords": [
+    "test", "command line"
+  ],
   "bugs": {
     "url": "http://github.com/wavify/crosstest/issues"
   },
